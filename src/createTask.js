@@ -1,5 +1,6 @@
 import Task from './task.js'
 
+// Create a fully functional div containing a task
 export function createTask(task) {
     // task.text    task.priority   task.dueDate
     const body = document.createElement("div");
@@ -12,6 +13,7 @@ export function createTask(task) {
     const editBtn = document.createElement("button")
     editBtn.innerText = "edit"
     const deleteBtn = document.createElement("button")
+    deleteBtn.className = "deleteBtn";
     deleteBtn.innerText = "X"
     
     // add checkbox functionality

@@ -36,9 +36,17 @@ body {
     border: 1px solid burlywood;
 }
 
+#task-body > input {
+    margin: 5%;
+}
+
 .checked {
     text-decoration: line-through;
     color: gray;
+}
+
+.deleteBtn {
+    background-color: red;
 }
 
 /* The Modal (background) */

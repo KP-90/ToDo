@@ -1,7 +1,7 @@
 # ToDo list
 
 To Do:
-1. users can create new tasks
+1. users can create new tasks (Done)
 ----1a. tasks will need an edit and delete button
 ----1b. tasks need check box and strikethrough upon completion. (Done, maybe also do side panel???)
 2. tasks can be sorted into projects/categories
