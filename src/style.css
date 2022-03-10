@@ -28,16 +28,25 @@ body {
 
 #task-body {
     margin: 5px;
-    padding: 2px;
     display: grid;
-    grid-template-columns: 50px 1fr 50px 50px;
+    grid-template-columns: 50px 4fr 1fr 75px 50px 50px;
     vertical-align: baseline;
     background-color: white;
     border: 1px solid burlywood;
 }
 
 #task-body > input {
-    margin: 5%;
+    width: 20px;
+    height: 20px;
+    justify-self: center;
+    top: 20%;
+    POSITION: relative;
+}
+
+.make-border {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 5px;
 }
 
 .checked {
@@ -101,4 +110,5 @@ body {
 #myBtn:hover {
     cursor: pointer;
     box-shadow: 1px 1px 5px black;
+    transform: scale(1.1);
 }

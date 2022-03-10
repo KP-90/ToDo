@@ -10,10 +10,10 @@ const sidePanel = document.getElementById("left-panel")
 const modal = document.getElementById("myModal");
 const modalContent = document.querySelector(".modal-content")
 const btnModal = document.getElementById("myBtn");
-let task1 = new Task("Test text", 1, "11/11/11")
-let task2 = new Task("Task2 test", 3, "1/13/33")
+let task1 = new Task("Example Task", "Normal", "01/01/1971 12:00 PM")
+
 taskArray.push(task1);
-taskArray.push(task2);
+
 
 function mainContent() {
     for (let item in taskArray) {
@@ -37,8 +37,17 @@ function deleteHandler() {
     let allDeleteBtns = document.querySelectorAll(".deleteBtn");
     allDeleteBtns.forEach(element => {
         element.addEventListener("click", (e) => {
-            console.log(element.parentElement.children[1].innerText);
-            //add delete stuff
+            // Delete from everywhere alse
+            main.removeChild(e.target.parentElement)
+
+            // Delete from array
+            let t = element.parentElement.children[1].innerText
+            for (let i in taskArray) {
+                if (t == taskArray[i].text) {
+                    taskArray.splice(i, 1);
+                }
+            }
+            createLeftPanel()
         })
     })
 }
@@ -58,7 +67,7 @@ submitBtn.addEventListener("click", () => {
     taskArray.push(newTask)
     main.appendChild(createTask(newTask));
     createLeftPanel();
-    allDeleteBtns = document.getElementsByClassName("deleteBtn");
+
     deleteHandler()
 })
 

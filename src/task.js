@@ -5,7 +5,5 @@ export default class Task {
         this.dueDate = dueDate
     }
 
-    summary() {
-        console.log("Summary goes here")
-    }
+    
 }

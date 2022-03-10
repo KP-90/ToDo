@@ -7,13 +7,25 @@ export function createTask(task) {
     body.id = "task-body";
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox")
+    check.className = "make-border"
     const taskText = document.createElement("p")
     taskText.className = ""
     taskText.innerText = task.text;
+    taskText.className = "make-border"
+    //Add duedate
+    const insertDate = document.createElement("p")
+    insertDate.innerText = task.dueDate
+    insertDate.className = "make-border"
+    //Add priority
+    const prio = document.createElement("p")
+    prio.innerText = task.priority
+    prio.style.fontWeight = "bold"
+    prio.className = "make-border"
+    //Buttons!!!
     const editBtn = document.createElement("button")
     editBtn.innerText = "edit"
     const deleteBtn = document.createElement("button")
-    deleteBtn.className = "deleteBtn";
+    deleteBtn.className = "deleteBtn"
     deleteBtn.innerText = "X"
     
     // add checkbox functionality
@@ -26,7 +38,7 @@ export function createTask(task) {
         }
     })
 
-    body.append(check, taskText, editBtn, deleteBtn);
+    body.append(check, taskText, insertDate, prio, editBtn, deleteBtn);
     return body;
 }
 
