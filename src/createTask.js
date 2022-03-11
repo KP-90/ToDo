@@ -1,13 +1,17 @@
 import Task from './task.js'
 
 // Create a fully functional div containing a task
-export function createTask(task) {
+export function createTaskDiv(task) {
     // task.text    task.priority   task.dueDate
     const body = document.createElement("div");
     body.id = "task-body";
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox")
     check.className = "make-border"
+    check.id = `${task.id}`
+    if (localStorage.getItem(`${task}`) == "true") {
+        check.classList.add("checked")
+    }
     const taskText = document.createElement("p")
     taskText.className = ""
     taskText.innerText = task.text;
@@ -32,10 +36,13 @@ export function createTask(task) {
     check.addEventListener("click", () => {
         if (taskText.classList.contains("checked")) {
             taskText.classList.remove("checked");
+            localStorage.setItem(`${task}`, "false")
         }
         else {
             taskText.classList.add("checked");
+            localStorage.setItem(`${task}`, "true")
         }
+        
     })
 
     body.append(check, taskText, insertDate, prio, editBtn, deleteBtn);
@@ -88,5 +95,6 @@ export function submitTask() {
     let due = document.getElementById("dateInput")
 
     let newTask = new Task(text.value, prio.value, due.value);
+    console.log(newTask.id)
     return newTask;
 }

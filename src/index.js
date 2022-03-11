@@ -1,23 +1,32 @@
 import Task from './task.js';
 import toggleModal from './modal.js';
-import {createTask, popPanel, setUpModal, submitTask} from './createTask.js';
+import {createTaskDiv, popPanel, setUpModal, submitTask} from './createTask.js';
 import './style.css';
-
-let taskArray = [];
+localStorage.clear()
 
 const main = document.getElementById("main");
 const sidePanel = document.getElementById("left-panel")
 const modal = document.getElementById("myModal");
 const modalContent = document.querySelector(".modal-content")
 const btnModal = document.getElementById("myBtn");
-let task1 = new Task("Example Task", "Normal", "01/01/1971 12:00 PM")
 
-taskArray.push(task1);
+let taskArray;
+if (localStorage.getItem("array")) {
+    taskArray = JSON.parse(localStorage.getItem("array"));
+}
+else {
+    taskArray = []
+}
 
+localStorage.setItem("array", JSON.stringify(taskArray));
+
+function save() {
+    localStorage.setItem("array", JSON.stringify(taskArray));
+}
 
 function mainContent() {
     for (let item in taskArray) {
-        main.appendChild(createTask(taskArray[item]));
+        main.appendChild(createTaskDiv(taskArray[item]));
     }
     
 }
@@ -47,6 +56,7 @@ function deleteHandler() {
                     taskArray.splice(i, 1);
                 }
             }
+            save()
             createLeftPanel()
         })
     })
@@ -65,14 +75,14 @@ submitBtn.addEventListener("click", () => {
     console.log("Click on submit")
     let newTask = submitTask();
     taskArray.push(newTask)
-    main.appendChild(createTask(newTask));
+    save();
+    main.appendChild(createTaskDiv(newTask));
     createLeftPanel();
 
     deleteHandler()
 })
 
-//create left panel
+// Build initial site
 createLeftPanel();
-
 mainContent()
 deleteHandler()
