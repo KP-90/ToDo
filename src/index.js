@@ -2,7 +2,6 @@ import Task from './task.js';
 import toggleModal from './modal.js';
 import {createTaskDiv, popPanel, setUpModal, submitTask} from './createTask.js';
 import './style.css';
-localStorage.clear()
 
 const main = document.getElementById("main");
 const sidePanel = document.getElementById("left-panel")
@@ -54,6 +53,7 @@ function deleteHandler() {
             for (let i in taskArray) {
                 if (t == taskArray[i].text) {
                     taskArray.splice(i, 1);
+                    localStorage.removeItem(`${i}`)
                 }
             }
             save()

@@ -9,9 +9,6 @@ export function createTaskDiv(task) {
     check.setAttribute("type", "checkbox")
     check.className = "make-border"
     check.id = `${task.id}`
-    if (localStorage.getItem(`${task}`) == "true") {
-        check.classList.add("checked")
-    }
     const taskText = document.createElement("p")
     taskText.className = ""
     taskText.innerText = task.text;
@@ -32,17 +29,22 @@ export function createTaskDiv(task) {
     deleteBtn.className = "deleteBtn"
     deleteBtn.innerText = "X"
     
+    // Set local storage 
+    if (localStorage.getItem(`${task.id}`) == "true") {
+        check.checked = true;
+        taskText.classList.add("checked")
+    }
+
     // add checkbox functionality
     check.addEventListener("click", () => {
         if (taskText.classList.contains("checked")) {
             taskText.classList.remove("checked");
-            localStorage.setItem(`${task}`, "false")
+            localStorage.setItem(`${task.id}`, "false")
         }
         else {
             taskText.classList.add("checked");
-            localStorage.setItem(`${task}`, "true")
-        }
-        
+            localStorage.setItem(`${task.id}`, "true")
+        }  
     })
 
     body.append(check, taskText, insertDate, prio, editBtn, deleteBtn);
@@ -88,13 +90,13 @@ export function setUpModal() {
 
     return container;
 }
-
+let count = 0
 export function submitTask() {
     let text = document.getElementById("textInput")
     let prio = document.getElementById("priorityInput")
     let due = document.getElementById("dateInput")
 
     let newTask = new Task(text.value, prio.value, due.value);
-    console.log(newTask.id)
+    count += 1;
     return newTask;
 }
