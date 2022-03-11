@@ -9,20 +9,24 @@ const modal = document.getElementById("myModal");
 const modalContent = document.querySelector(".modal-content")
 const btnModal = document.getElementById("myBtn");
 
+// Initiate local storage
 let taskArray;
 if (localStorage.getItem("array")) {
     taskArray = JSON.parse(localStorage.getItem("array"));
 }
 else {
     taskArray = []
+    let example = new Task("Example item for to-do list", "Low", "1970-01-01 12:00")
+    taskArray.push(example)
 }
-
 localStorage.setItem("array", JSON.stringify(taskArray));
 
+// Updates local storage taskArray
 function save() {
     localStorage.setItem("array", JSON.stringify(taskArray));
 }
 
+// Populates the main page with items from array of taskArray
 function mainContent() {
     for (let item in taskArray) {
         main.appendChild(createTaskDiv(taskArray[item]));
@@ -30,6 +34,7 @@ function mainContent() {
     
 }
 
+// Populates the left panel section
 function createLeftPanel() {
     while (sidePanel.firstChild) {
         sidePanel.removeChild(sidePanel.firstChild)
@@ -41,6 +46,7 @@ function createLeftPanel() {
     sidePanel.appendChild(panelList);
 }
 
+// Add delete button functionality
 function deleteHandler() {
     let allDeleteBtns = document.querySelectorAll(".deleteBtn");
     allDeleteBtns.forEach(element => {

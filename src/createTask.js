@@ -60,10 +60,19 @@ export function popPanel(task) {
 // function to set up the modal with inputs
 export function setUpModal() {
     let container = document.createElement("div");
-    let textInput = document.createElement("input");
+    container.classList.add("modalDiv")
+    let textLabel = document.createElement("label")
+    textLabel.innerText = "Text:"
+    let textInput = document.createElement("textArea");
     textInput.id = "textInput";
+    //priority stuff
+    let priorityLabel = document.createElement("label")
+    priorityLabel.innerText = "Priority:"
     let priorityInput  = document.createElement("select");
     priorityInput.id = "priorityInput";
+    // Due Date stuff
+    let dateLabel = document.createElement("label")
+    dateLabel.innerText = "Due Date:"
     let dateInput = document.createElement("input");
     dateInput.id = "dateInput"
     let btn = document.createElement("button");
@@ -86,7 +95,9 @@ export function setUpModal() {
     btn.innerText = "Submit";
 
     //Append everything
-    container.append(textInput, dateInput, priorityInput, btn);
+    container.append(textLabel, document.createElement("br"), textInput, document.createElement("br"),
+                    dateLabel, document.createElement("br"), dateInput, document.createElement("br"),
+                    priorityLabel, priorityInput, document.createElement("br"), btn);
 
     return container;
 }
@@ -95,8 +106,8 @@ export function submitTask() {
     let text = document.getElementById("textInput")
     let prio = document.getElementById("priorityInput")
     let due = document.getElementById("dateInput")
-
-    let newTask = new Task(text.value, prio.value, due.value);
+    due = due.value.replace("T", " ")
+    let newTask = new Task(text.value, prio.value, due);
     count += 1;
     return newTask;
 }
